@@ -18,11 +18,11 @@ void Start()
             Start();
             break;
         case FIFTYSIX:
-            //Task46(false); 
+            Task56(); 
             Start();
             break;
         case FIFTYEIGHT:
-            //Task58();
+            Task58();
             Start();
             break;
         case SIXTY:
@@ -61,9 +61,80 @@ string isValidInputMenu(string userInput)
 
 // ============= Задачи ============= \\
 
+/// <summary>/// 
+/// Задача 56. Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
+/// </summary>
+void Task56()
+{
+    Console.WriteLine("Задача 56. Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.\n");
+    const int ROWSIZE = 4;
+    const int COLUMNSIZE = 3;
+    const int MINVALUE = 0;
+    const int MAXVALUE = 10;
+
+    int[,] matrix = FillMatrix2d(ROWSIZE, COLUMNSIZE, MINVALUE, MAXVALUE);
+    int result = int.MaxValue;
+    int resultRow = 0;
+    int temp;
+
+    for (int i = 0; i < ROWSIZE; i++)
+    {
+        temp = 0;
+        for (int j = 0; j < COLUMNSIZE; j++)
+        {
+            temp += matrix[i, j];
+            Console.Write($"{matrix[i, j]} ");
+        }
+
+        if (result > temp)
+        {
+            result = temp;
+            resultRow = i;
+        }
+
+        Console.WriteLine("");
+    }
+
+    Console.WriteLine($"\nВ прямоугольном массиве строкой с наименьшей суммой элементов является {resultRow + 1}, где сумма = {result}\n");
+}
+
+/// <summary>
+/// Задача 58. Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+/// </summary>
+void Task58()
+{
+    Console.WriteLine("Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.\n");
+
+    const int TWO = 2;
+    const int MINVALUE = 0;
+    const int MAXVALUE = 10;
+    int result;
+
+    int[,] firstMatrix = FillMatrix2d(TWO, TWO, MINVALUE, MAXVALUE);
+    int[,] secondMatrix = FillMatrix2d(TWO, TWO, MINVALUE, MAXVALUE);
+    int[,] resultsMatrix = new int[TWO, TWO];
+
+    for (int i = 0; i < TWO; i++)
+    {
+        for (int j = 0; j < TWO; j++)
+        {
+            result = firstMatrix[i,j] * secondMatrix[i,j];
+            resultsMatrix[i,j] = result;
+
+            if (result < 10) Console.Write($"0{result} ");
+            else Console.Write($"{result} ");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+}
+
+/// <summary>
+/// Задача 60. Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.Массив размером 2 x 2 x 2
+/// </summary>
 void Task60()
 {
-    Console.WriteLine("Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.Массив размером 2 x 2 x 2");
+    Console.WriteLine("Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.Массив размером 2 x 2 x 2\n");
     
     const int TWO = 2;
     int value;
@@ -83,6 +154,7 @@ void Task60()
             Console.WriteLine();
         }
     }
+    Console.WriteLine();
 }
 
 /// <summary>
@@ -184,6 +256,30 @@ void Task62()
     /// <returns>Истину если счетчик достигает квадрата размера матрицы.</returns>
     bool isEnd(int currentDigit, int size)
     {
-        return currentDigit < SIZE * SIZE + 1;
+        return currentDigit == SIZE * SIZE + 1;
     }
+}
+
+/// <summary>
+/// Заполняет двумерый массив.
+/// </summary>
+/// <param name="rowSize">Размер внешнего массива.</param>
+/// <param name="columnSize">Размер внутреннего массива.</param>
+/// <param name="minValue">Минимальное рандомное значение.</param>
+/// <param name="maxValue">Максимальное рандомное значение.</param>
+/// <returns></returns>
+int[,] FillMatrix2d(int rowSize, int columnSize, int minValue, int maxValue)
+{
+    int[,] matrix = new int[rowSize, columnSize];
+    Random rnd = new Random();
+
+    for (int i = 0; i < rowSize; i++)
+    {
+        for (int j = 0; j < columnSize; j++)
+        {
+            matrix[i,j] = rnd.Next(minValue, maxValue); 
+        }
+    }
+
+    return matrix;
 }
