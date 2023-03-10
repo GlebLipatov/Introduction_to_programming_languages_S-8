@@ -26,7 +26,7 @@ void Start()
             Start();
             break;
         case SIXTY:
-            //Task60();
+            Task60();
             Start();
             break;
         case SIXTYTWO:
@@ -56,6 +56,32 @@ string isValidInputMenu(string userInput)
     {
         Console.WriteLine("Введите номер задачи (54, 56, 58, 60, 62) или 'q' что бы выйти:");
         return isValidInputMenu(Console.ReadLine());
+    }
+}
+
+// ============= Задачи ============= \\
+
+void Task60()
+{
+    Console.WriteLine("Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.Массив размером 2 x 2 x 2");
+    
+    const int TWO = 2;
+    int value;
+
+    int[,,] matrix3d = new int[TWO, TWO, TWO];
+
+    for (int i = 0; i < TWO; i++)
+    {
+        for (int j = 0; j < TWO; j++)
+        {
+            for (int k = 0; k < TWO; k++)
+            {
+                value = new Random().Next(10, 100);
+                matrix3d[i, j, k] = value;
+                Console.Write($"{value}({i},{j},{k}) ");
+            }
+            Console.WriteLine();
+        }
     }
 }
 
