@@ -158,6 +158,6 @@ void Task62()
     /// <returns>Истину если счетчик достигает квадрата размера матрицы.</returns>
     bool isEnd(int currentDigit, int size)
     {
-        return currentDigit <= SIZE * SIZE + 1;
+        return currentDigit < SIZE * SIZE + 1;
     }
 }
