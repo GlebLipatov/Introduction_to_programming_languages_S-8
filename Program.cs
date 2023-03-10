@@ -1,4 +1,4 @@
-﻿Start();
+﻿StartMenu();
 
 const string FIFTYFOUR = "54";
 const string FIFTYSIX = "56";
@@ -7,31 +7,31 @@ const string SIXTY = "60";
 const string SIXTYTWO = "62";
 const string QUIT = "q";
 
-void Start()
+void StartMenu()
 {
     Console.WriteLine("Введите номер задачи (54, 56, 58, 60, 62) или 'q' что бы выйти: ");
 
     switch (isValidInputMenu(Console.ReadLine()))
     {
         case FIFTYFOUR:
-            Task54();
-            Start();
+            DoTask54();
+            StartMenu();
             break;
         case FIFTYSIX:
-            Task56();
-            Start();
+            DoTask56();
+            StartMenu();
             break;
         case FIFTYEIGHT:
-            Task58();
-            Start();
+            DoTask58();
+            StartMenu();
             break;
         case SIXTY:
-            Task60();
-            Start();
+            DoTask60();
+            StartMenu();
             break;
         case SIXTYTWO:
-            Task62();
-            Start();
+            DoTask62();
+            StartMenu();
             break;
         case QUIT:
             Console.WriteLine("Пока!");
@@ -65,7 +65,7 @@ string isValidInputMenu(string userInput)
 /// <summary>
 /// Задача 54. Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
 /// </summary>
-void Task54()
+void DoTask54()
 {
     Console.WriteLine("Задача 54. Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.\n");
 
@@ -103,7 +103,7 @@ void Task54()
 /// <summary>/// 
 /// Задача 56. Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
 /// </summary>
-void Task56()
+void DoTask56()
 {
     Console.WriteLine("Задача 56. Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.\n");
     const int ROWSIZE = 4;
@@ -140,7 +140,7 @@ void Task56()
 /// <summary>
 /// Задача 58. Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
 /// </summary>
-void Task58()
+void DoTask58()
 {
     Console.WriteLine("Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.\n");
 
@@ -171,7 +171,7 @@ void Task58()
 /// <summary>
 /// Задача 60. Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.Массив размером 2 x 2 x 2
 /// </summary>
-void Task60()
+void DoTask60()
 {
     Console.WriteLine("Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.Массив размером 2 x 2 x 2\n");
 
@@ -199,7 +199,7 @@ void Task60()
 /// <summary>
 /// Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
 /// </summary>
-void Task62()
+void DoTask62()
 {
     // Хотел сделать что бы метод выдавал спиральную матрицу не только 4х4, но и бОльших размеров, пока не успел(((
 
