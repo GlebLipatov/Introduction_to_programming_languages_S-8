@@ -14,11 +14,11 @@ void Start()
     switch (isValidInputMenu(Console.ReadLine()))
     {
         case FIFTYFOUR:
-            //Task54(true);
+            Task54();
             Start();
             break;
         case FIFTYSIX:
-            Task56(); 
+            Task56();
             Start();
             break;
         case FIFTYEIGHT:
@@ -60,6 +60,45 @@ string isValidInputMenu(string userInput)
 }
 
 // ============= Задачи ============= \\
+
+
+/// <summary>
+/// Задача 54. Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
+/// </summary>
+void Task54()
+{
+    Console.WriteLine("Задача 54. Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.\n");
+
+    const int ROWSIZE = 4;
+    const int COLUMNSIZE = 4;
+    const int MINVALUE = 0;
+    const int MAXVALUE = 10;
+    const string MATRIXBEFORE = "Матрица до сортировки.";
+    const string MATRIXAFTER = "Матрица после сортировки.";
+
+    List<List<int>> matrix = new List<List<int>>();
+
+    // Fill matrix.
+    for (int i = 0; i < ROWSIZE; i++)
+    {
+        matrix.Add(new List<int>());
+        for (int j = 0; j < COLUMNSIZE; j++)
+        {
+            matrix[i].Add(new Random().Next(MINVALUE, MAXVALUE));
+        }
+    }
+
+    PrintMatrixList(MATRIXBEFORE ,matrix);
+
+    foreach (List<int> row in matrix)
+    {
+        row.Sort();
+        row.Reverse();
+    }
+
+    PrintMatrixList(MATRIXAFTER, matrix);
+}
+
 
 /// <summary>/// 
 /// Задача 56. Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
@@ -118,8 +157,8 @@ void Task58()
     {
         for (int j = 0; j < TWO; j++)
         {
-            result = firstMatrix[i,j] * secondMatrix[i,j];
-            resultsMatrix[i,j] = result;
+            result = firstMatrix[i, j] * secondMatrix[i, j];
+            resultsMatrix[i, j] = result;
 
             if (result < 10) Console.Write($"0{result} ");
             else Console.Write($"{result} ");
@@ -135,7 +174,7 @@ void Task58()
 void Task60()
 {
     Console.WriteLine("Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.Массив размером 2 x 2 x 2\n");
-    
+
     const int TWO = 2;
     int value;
 
@@ -277,9 +316,29 @@ int[,] FillMatrix2d(int rowSize, int columnSize, int minValue, int maxValue)
     {
         for (int j = 0; j < columnSize; j++)
         {
-            matrix[i,j] = rnd.Next(minValue, maxValue); 
+            matrix[i, j] = rnd.Next(minValue, maxValue);
         }
     }
 
     return matrix;
+}
+
+/// <summary>
+/// Печатаем матрицу(List).
+/// </summary>
+/// <param name="label">Описание матрицы.</param>
+/// <param name="matrix">Печатаемая матрица</param>
+void PrintMatrixList(string label, List<List<int>> matrix)
+{
+    Console.WriteLine("\n" + label + "\n");
+
+    foreach (List<int> row in matrix)
+    {
+        foreach (int value in row)
+        {
+            Console.Write(value + " ");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
 }
