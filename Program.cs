@@ -1,86 +1,163 @@
-﻿int size = 4;
-int sideSize = size - 1;
-int[,] matrix = new int[size, size];
-int countRow = sideSize;
-int countColumn = sideSize;
-int currentDigit = 1;
-int row = sideSize - countColumn;
-int column = sideSize - countColumn;
-int round = 1;
+﻿Start();
 
-bool isTopSideToFill = true;
-bool isRightSideToFill = false;
-bool isBottomSideToFill = false;
-bool isLeftSideToFill = false;
+const string FIFTYFOUR = "54";
+const string FIFTYSIX = "56";
+const string FIFTYEIGHT = "58";
+const string SIXTY = "60";
+const string SIXTYTWO = "62";
+const string QUIT = "q";
 
-while (!isEnd(currentDigit, size))
+void Start()
 {
-    row = sideSize - countRow;
-    column = sideSize - countColumn;
+    Console.WriteLine("Введите номер задачи (54, 56, 58, 60, 62) или 'q' что бы выйти: ");
 
-    if (isTopSideToFill)
+    switch (isValidInputMenu(Console.ReadLine()))
     {
-        matrix[row, column] = currentDigit++;
-        countColumn--;
-
-        if (sideSize - countColumn == sideSize)
-        {
-            isTopSideToFill = false;
-            isRightSideToFill = true;
-        }
+        case FIFTYFOUR:
+            //Task54(true);
+            Start();
+            break;
+        case FIFTYSIX:
+            //Task46(false); 
+            Start();
+            break;
+        case FIFTYEIGHT:
+            //Task58();
+            Start();
+            break;
+        case SIXTY:
+            //Task60();
+            Start();
+            break;
+        case SIXTYTWO:
+            Task62();
+            Start();
+            break;
+        case QUIT:
+            Console.WriteLine("Пока!");
+            break;
     }
-    else if (isRightSideToFill)
-    {
-        matrix[row, column] = currentDigit++;
-        countRow--;
-
-        if (sideSize - countRow == sideSize)
-        {
-            isRightSideToFill = false;
-            isBottomSideToFill = true;
-        }
-
-    }
-    else if (isBottomSideToFill)
-    {
-        matrix[row, column] = currentDigit++;
-        countColumn++;
-
-        if (sideSize - countColumn == 0)
-        {
-            isBottomSideToFill = false;
-            isLeftSideToFill = true;
-        }
-    }
-    else if (isLeftSideToFill)
-    {
-        matrix[row, column] = currentDigit++;
-        countRow++;
-        
-        if (sideSize - countRow == 0)
-        {
-            isLeftSideToFill = false;
-            isTopSideToFill = true;
-            sideSize--;
-            countRow = sideSize - round;
-            countColumn = sideSize - round;
-            round++;
-        }
-    }
-
 }
 
-for (int i = 0; i < size; i++)
+string isValidInputMenu(string userInput)
 {
-    for (int j = 0; j < size; j++)
+    userInput = userInput.ToLower();
+
+    if (userInput == FIFTYFOUR
+     || userInput == FIFTYSIX
+     || userInput == FIFTYEIGHT
+     || userInput == SIXTY
+     || userInput == SIXTYTWO
+     || userInput == QUIT)
     {
-        if (matrix[i, j] < 10) Console.Write($"0{matrix[i, j]} ");
-        else Console.Write(matrix[i, j] + " ");
+        return userInput;
     }
-    Console.WriteLine();
+    else
+    {
+        Console.WriteLine("Введите номер задачи (54, 56, 58, 60, 62) или 'q' что бы выйти:");
+        return isValidInputMenu(Console.ReadLine());
+    }
 }
 
-bool isEnd(int currentDigit, int size)
+/// <summary>
+/// Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
+/// </summary>
+void Task62()
 {
-    return currentDigit == size * size + 1;
+    // Хотел сделать что бы метод выдавал спиральную матрицу не только 4х4, но и бОльших размеров, пока не успел(((
+
+    Console.WriteLine("Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.");
+
+    const int SIZE = 4;
+    int sideSize = SIZE - 1; // Переменная для индексации массивов.
+    int[,] matrix = new int[SIZE, SIZE];
+    int countRow = sideSize;
+    int countColumn = sideSize;
+    int currentDigit = 1; // Генератор чисел в матрицу.
+    int row = sideSize - countColumn;
+    int column = sideSize - countColumn;
+    int lap = 0;
+
+    // Логические переменные ветвлений для заполнения конкретных сторон матрицы.
+    bool isTopSideToFill = true;
+    bool isRightSideToFill = false;
+    bool isBottomSideToFill = false;
+    bool isLeftSideToFill = false;
+
+    while (!isEnd(currentDigit, SIZE))
+    {
+        row = sideSize - countRow;
+        column = sideSize - countColumn;
+
+        if (isTopSideToFill)
+        {
+            matrix[row, column] = currentDigit++;
+            countColumn--;
+
+            if (sideSize - countColumn == sideSize)
+            {
+                isTopSideToFill = false;
+                isRightSideToFill = true;
+            }
+        }
+        else if (isRightSideToFill)
+        {
+            matrix[row, column] = currentDigit++;
+            countRow--;
+
+            if (sideSize - countRow == sideSize)
+            {
+                isRightSideToFill = false;
+                isBottomSideToFill = true;
+            }
+        }
+        else if (isBottomSideToFill)
+        {
+            matrix[row, column] = currentDigit++;
+            countColumn++;
+
+            if (sideSize - countColumn == lap)
+            {
+                isBottomSideToFill = false;
+                isLeftSideToFill = true;
+            }
+        }
+        else if (isLeftSideToFill)
+        {
+            matrix[row, column] = currentDigit++;
+            countRow++;
+
+            if (sideSize - countRow == lap)
+            {
+                isLeftSideToFill = false;
+                isTopSideToFill = true;
+                sideSize--;
+                countRow = sideSize - 1;
+                countColumn = sideSize - 1;
+                lap++;
+            }
+        }
+    }
+
+    // Печатаем заполненную матрицу.
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            if (matrix[i, j] < 10) Console.Write($"0{matrix[i, j]} ");
+            else Console.Write(matrix[i, j] + " ");
+        }
+        Console.WriteLine();
+    }
+
+    /// <summary>
+    /// Проверка выхода из цикла.
+    /// </summary>
+    /// <param name="currentDigit">Счетчик который проверяем.</param>
+    /// <param name="size">Размер квадратной матрицы.</param>
+    /// <returns>Истину если счетчик достигает квадрата размера матрицы.</returns>
+    bool isEnd(int currentDigit, int size)
+    {
+        return currentDigit <= SIZE * SIZE + 1;
+    }
 }
